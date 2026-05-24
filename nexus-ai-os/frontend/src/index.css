@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-nexus-bg text-nexus-text;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-nexus-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-nexus-surface rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-nexus-border;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-nexus-surface/50 backdrop-blur-sm border border-white/5 rounded-lg;
+  }
+
+  .panel-hover {
+    @apply hover:border-nexus-border/30 transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply px-3 py-1.5 bg-nexus-project/20 text-nexus-accent border border-nexus-border/30 rounded 
+           hover:bg-nexus-project/30 transition-all duration-200 text-sm font-medium;
+  }
+
+  .btn-ghost {
+    @apply px-3 py-1.5 text-nexus-text/70 hover:text-nexus-text hover:bg-white/5 rounded 
+           transition-all duration-200 text-sm;
+  }
+
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+
+  .status-active { @apply bg-nexus-success; }
+  .status-blocked { @apply bg-nexus-urgent; }
+  .status-pending { @apply bg-nexus-pending; }
+  .status-waiting { @apply bg-nexus-pending; }
+}
