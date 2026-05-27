@@ -1,0 +1,44 @@
+# ═══════════════════════════════════════════════════════════════
+#  docker-compose.dev.yml
+#  Development overrides — used by: ./start.sh --dev
+#  Exposes internal ports to the host for direct debugging.
+#  Inherit everything from docker-compose.yml.
+# ═══════════════════════════════════════════════════════════════
+
+version: "3.9"
+
+services:
+
+  postgres:
+    ports:
+      - "5432:5432"    # connect with: psql -h localhost -U aios -d aios_db
+
+  redis:
+    ports:
+      - "6379:6379"    # connect with: redis-cli -h localhost
+
+  minio:
+    ports:
+      - "9000:9000"    # S3 API
+      - "9001:9001"    # console
+
+  backend:
+    ports:
+      - "8000:8000"    # direct FastAPI access at http://localhost:8000/docs
+    # Hot reload in dev mode
+    volumes:
+      - ./backend:/app
+      - file_storage:/app/storage
+      - embedding_cache:/root/.cache/torch
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+
+  worker:
+    volumes:
+      - ./backend:/app
+      - file_storage:/app/storage
+      - embedding_cache:/root/.cache/torch
+    command: celery -A app.workflows.runner worker --loglevel=debug --concurrency=2
+
+  frontend:
+    ports:
+      - "80:80"
