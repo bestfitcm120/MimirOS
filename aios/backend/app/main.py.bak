@@ -10,7 +10,7 @@ from app.routers import (
     projects, tasks, memories, documents, files,
     agents, workflows, graph, search, approvals,
     notifications, decisions, failures, events,
-    people, companies
+    users, people, companies
 )
 
 log = structlog.get_logger()
@@ -40,6 +40,7 @@ app.add_middleware(
 )
 
 # Register all routers
+app.include_router(users.router, prefix="/api/users", tags=["Users"])
 app.include_router(projects.router, prefix="/api/projects", tags=["Projects"])
 app.include_router(tasks.router, prefix="/api/tasks", tags=["Tasks"])
 app.include_router(memories.router, prefix="/api/memories", tags=["Memories"])

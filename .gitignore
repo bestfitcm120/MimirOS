@@ -1,4 +1,10 @@
 
+# ignore python cache files
+*.pyc 
+
+# ignore node modules
+node_modules/
+
 # Ignore environment variable files
 *.env
 *.env.local
