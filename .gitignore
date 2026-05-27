@@ -1,4 +1,7 @@
 
+# Ignore environment variable files
+*.env
+*.env.local
 
 # vs code config files
 *.code-workspace
@@ -9,7 +12,6 @@ nexus-ai-os/*
 # aios/*
 opencode/*
 claude-code/*
-
 
 # Ignore all ISO files (iso files will be artifacts of the build process and should not be committed to the repository)
 *.iso
