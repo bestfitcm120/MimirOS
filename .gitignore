@@ -1,4 +1,7 @@
 
+# python cache files
+*.pyc
+
 # Ignore environment variable files
 *.env
 *.env.local
